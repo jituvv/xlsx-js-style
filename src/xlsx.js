@@ -14836,6 +14836,7 @@ function write_ws_xml_cell(cell, ref, ws, opts) {
 	return writextag('c', v, o);
 }
 
+
 var parse_ws_xml_data = (function() {
 	var cellregex = /<(?:\w+:)?c[ \/>]/, rowregex = /<\/(?:\w+:)?row>/;
 	var rregex = /r=["']([^"']*)["']/, isregex = /<(?:\w+:)?is>([\S\s]*?)<\/(?:\w+:)?is>/;
