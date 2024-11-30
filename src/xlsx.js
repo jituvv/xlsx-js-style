@@ -14827,7 +14827,11 @@ function write_ws_xml_cell(cell, ref, ws, opts) {
 		var ff = cell.F && cell.F.slice(0, ref.length) == ref ? {t:"array", ref:cell.F} : null;
 		v = writextag('f', escapexml(cell.f), ff) + (cell.v != null ? v : "");
 	}
-	if(cell.l) ws['!links'].push([ref, cell.l]);
+	// if(cell.l) ws['!links'].push([ref, cell.l]);
+	if(cell.l) {
+		cell.l.display = escapexml(vv);
+		ws['!links'].push([ref, cell.l]);
+	}
 	if(cell.D) o.cm = 1;
 	return writextag('c', v, o);
 }
