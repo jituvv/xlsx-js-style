@@ -15137,6 +15137,7 @@ ws['!links'].forEach(function(l) {
 			}
 			if((relc = l[1].Target.indexOf("#")) > -1) rel.location = escapexml(l[1].Target.slice(relc+1));
 			if(l[1].Tooltip) rel.tooltip = escapexml(l[1].Tooltip);
+			rel.display = l[1].display;
 			o[o.length] = writextag("hyperlink",null,rel);
 		});
 		o[o.length] = "</hyperlinks>";
@@ -20668,7 +20669,12 @@ function write_ws_biff8(idx, opts, wb) {
 			if(!cell) continue;
 			/* write cell */
 			write_ws_biff8_cell(ba, cell, R, C, opts);
-			if(b8 && cell.l) ws['!links'].push([ref, cell.l]);
+			// if(b8 && cell.l) ws['!links'].push([ref, cell.l]);
+			// if(cell.l) ws['!links'].push([ref, cell.l]);
+			if(b8 && cell.l) {
+				cell.l.display = escapexml(vv);
+				ws['!links'].push([ref, cell.l]);
+			}
 		}
 	}
 	var cname = _sheet.CodeName || _sheet.name || s;
